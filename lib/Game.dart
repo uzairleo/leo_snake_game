@@ -1,13 +1,14 @@
-
 import 'dart:async';
 import 'dart:math';
+import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import './Widgets/widgets_at_different_game_state.dart';
+import 'package:control_pad/control_pad.dart';
 
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
+int score = 0;
 
 class Game extends StatefulWidget {
   @override
@@ -20,7 +21,6 @@ class _GameState extends State<Game> {
   Timer timer;
   Direction _direction = Direction.UP;
   var gameState = GameState.START;
-  int score = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -60,66 +60,97 @@ class _GameState extends State<Game> {
                 ),
                 child: Text(
                   "Score\n$score",
+                  // "",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                   ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.end,
+              Stack(
+                // mainAxisAlignment: MainAxisAlignment.start,
+                // crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(right: 50),
-                    child: RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _direction = Direction.UP;
-                        });
-                      },
-                      color: Colors.green,
-                      child: Icon(Icons.keyboard_arrow_up),
-                    ),
+                  // JoystickView(
+                  //   onDirectionChanged: (x,y){
+
+                  //   },
+                  // )
+                  CircleView.joystickCircle(
+                    174,
+                    Colors.blueGrey,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      RaisedButton(
-                        onPressed: () {
-                          setState(() {
-                            _direction = Direction.LEFT;
-                          });
-                        },
-                        color: Colors.yellow,
-                        child: Icon(Icons.keyboard_arrow_left),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: RaisedButton(
-                          onPressed: () {
-                            setState(() {
-                              _direction = Direction.RIGHT;
-                            });
-                          },
-                          color: Colors.yellow,
-                          child: Icon(Icons.keyboard_arrow_right),
-                        ),
-                      ),
-                    ],
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(right: 50),
-                    child: RaisedButton(
-                      onPressed: () {
-                        setState(() {
-                          _direction = Direction.DOWN;
-                        });
-                      },
-                      color: Colors.green,
-                      child: Icon(Icons.keyboard_arrow_down),
-                    ),
-                  ),
+                  Positioned(
+                      left: 43.0,
+                      top: 47.0,
+                      child:
+                          CircleView.joystickInnerCircle(85, Colors.blueGrey)),
+
+                  Positioned(
+                    left: 128,
+                    top: 75,
+                      child: CircleView.padButtonCircle(0, Colors.blueGrey,
+                          null, Icon(Icons.arrow_forward), ""))
+                  ,Positioned(
+                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
+                          null, Icon(Icons.arrow_back), ""))
+                  ,Positioned(
+                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
+                          null, Icon(Icons.arrow_upward), ""))
+                  ,Positioned(
+                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
+                          null, Icon(Icons.arrow_downward), ""))
+                  
+                  // Padding(
+                  //   padding: EdgeInsets.only(right: 50),
+                  //   child: RaisedButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         _direction = Direction.UP;
+                  //       });
+                  //     },
+                  //     color: Colors.green,
+                  //     child: Icon(Icons.keyboard_arrow_up),
+                  //   ),
+                  // ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.end,
+                  //   children: <Widget>[
+                  //     RaisedButton(
+                  //       onPressed: () {
+                  //         setState(() {
+                  //           _direction = Direction.LEFT;
+                  //         });
+                  //       },
+                  //       color: Colors.yellow,
+                  //       child: Icon(Icons.keyboard_arrow_left),
+                  //     ),
+                  //     Padding(
+                  //       padding: EdgeInsets.only(left: 10),
+                  //       child: RaisedButton(
+                  //         onPressed: () {
+                  //           setState(() {
+                  //             _direction = Direction.RIGHT;
+                  //           });
+                  //         },
+                  //         color: Colors.yellow,
+                  //         child: Icon(Icons.keyboard_arrow_right),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(right: 50),
+                  //   child: RaisedButton(
+                  //     onPressed: () {
+                  //       setState(() {
+                  //         _direction = Direction.DOWN;
+                  //       });
+                  //     },
+                  //     color: Colors.green,
+                  //     child: Icon(Icons.keyboard_arrow_down),
+                  //   ),
+                  // ),
                 ],
               ),
             ],
