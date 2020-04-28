@@ -29,7 +29,7 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
                           CircleView.joystickInnerCircle(85, Colors.blueGrey)),
 
                   Positioned(
-                      left: 134,
+                      left: 124,
                       top: 68,
                       child: IconButton(
                         icon: Icon(
@@ -87,7 +87,8 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
                     left: 50.0,
                     top: 51.5,
                     child:Icon(Icons.tag_faces,size: 80,color:Colors.white24,)
-                  ),               ],
+                  ),    
+                             ],
               ),
             ],
           ));
