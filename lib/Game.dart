@@ -3,12 +3,14 @@ import 'dart:math';
 import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:leo_snake_game/customJoystick.dart';
 import './Widgets/widgets_at_different_game_state.dart';
 import 'package:control_pad/control_pad.dart';
 
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
+  Direction direction = Direction.UP;
 
 class Game extends StatefulWidget {
   @override
@@ -19,7 +21,6 @@ class _GameState extends State<Game> {
   var snakePosition;
   Point newPointPosition;
   Timer timer;
-  Direction _direction = Direction.UP;
   var gameState = GameState.START;
 
   @override
@@ -45,154 +46,7 @@ class _GameState extends State<Game> {
             child: _getChildBasedOnGameState(),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(left: 20.0, right: 20.0),
-          child: Row(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              // Container(
-              //   width: 100,
-              //   height: 100,
-              //   alignment: Alignment.center,
-              //   decoration: BoxDecoration(
-              //     border: Border.all(width: 1.0, color: Colors.red),
-              //     borderRadius: BorderRadius.circular(10.0),
-              //   ),
-              //   child: Text(
-              //     "Score\n$score",
-              //     // "",
-              //     textAlign: TextAlign.center,
-              //     style: TextStyle(
-              //       color: Colors.white,
-              //     ),
-              //   ),
-              // ),
-              Stack(
-                // mainAxisAlignment: MainAxisAlignment.start,
-                // crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  // JoystickView(),
-                  CircleView.joystickCircle(
-                    180,
-                    Colors.blueGrey,
-                  ),
-                  Positioned(
-                      left: 47.0,
-                      top: 50.0,
-                      child:
-                          CircleView.joystickInnerCircle(85, Colors.blueGrey)),
-
-                  Positioned(
-                      left: 134,
-                      top: 76,
-                      child: CircleView.padButtonCircle(
-                          0,
-                          Colors.blueGrey,
-                          null,
-                          Icon(
-                            Icons.arrow_forward,
-                            color: Colors.white54,
-                          ),
-                          "")),
-                  Positioned(
-                      left: 18,
-                      top: 76,
-                      child: CircleView.padButtonCircle(
-                          0,
-                          Colors.blueGrey,
-                          null,
-                          Icon(
-                            Icons.arrow_back,
-                            color: Colors.white54,
-                          ),
-                          "")),
-                  Positioned(
-                      left: 75,
-                      top: 20.0,
-                      child: CircleView.padButtonCircle(
-                          0,
-                          Colors.blueGrey,
-                          null,
-                          Icon(
-                            Icons.arrow_upward,
-                            color: Colors.white54,
-                          ),
-                          "")),
-                  Positioned(
-                      left: 75,
-                      top: 138,
-                      child: InkWell(
-                        onTap: () {
-                          print("i am pressed");
-                        },
-                        child: CircleView.padButtonCircle(
-                            0,
-                            Colors.blueGrey,
-                            null,
-                            Icon(
-                              Icons.arrow_downward,
-                              color: Colors.white54,
-                            ),
-                            ""),
-                      )),
-                  // JoystickView(),
-
-                  // Padding(
-                  //   padding: EdgeInsets.only(right: 50),
-                  //   child: RaisedButton(
-                  //     onPressed: () {
-                  //       setState(() {
-                  //         _direction = Direction.UP;
-                  //       });
-                  //     },
-                  //     color: Colors.green,
-                  //     child: Icon(Icons.keyboard_arrow_up),
-                  //   ),
-                  // ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.end,
-                  //   children: <Widget>[
-                  //     RaisedButton(
-                  //       onPressed: () {
-                  //         setState(() {
-                  //           _direction = Direction.LEFT;
-                  //         });
-                  //       },
-                  //       color: Colors.yellow,
-                  //       child: Icon(Icons.keyboard_arrow_left),
-                  //     ),
-                  //     Padding(
-                  //       padding: EdgeInsets.only(left: 10),
-                  //       child: RaisedButton(
-                  //         onPressed: () {
-                  //           setState(() {
-                  //             _direction = Direction.RIGHT;
-                  //           });
-                  //         },
-                  //         color: Colors.yellow,
-                  //         child: Icon(Icons.keyboard_arrow_right),
-                  //       ),
-                  //     ),
-                  //   ],
-                  // ),
-                  // Padding(
-                  //   padding: EdgeInsets.only(right: 50),
-                  //   child: RaisedButton(
-                  //     onPressed: () {
-                  //       setState(() {
-                  //         _direction = Direction.DOWN;
-                  //       });
-                  //     },
-                  //     color: Colors.green,
-                  //     child: Icon(Icons.keyboard_arrow_down),
-                  //   ),
-                  // ),
-                ],
-              ),
-            ],
-          ),
-        ),
+        CustomJoyStick(),
       ],
     );
   }
@@ -213,7 +67,7 @@ class _GameState extends State<Game> {
   void startToRunState() {
     startingSnake();
     generatenewPoint();
-    _direction = Direction.UP;
+    direction = Direction.UP;
     setGameState(GameState.RUNNING);
     timer = new Timer.periodic(new Duration(milliseconds: 400), onTimeTick);
   }
@@ -337,7 +191,7 @@ class _GameState extends State<Game> {
   Point getLatestSnake() {
     var newHeadPos;
 
-    switch (_direction) {
+    switch (direction) {
       case Direction.LEFT:
         var currentHeadPos = snakePosition.first;
         newHeadPos = Point(currentHeadPos.x - 1, currentHeadPos.y);
