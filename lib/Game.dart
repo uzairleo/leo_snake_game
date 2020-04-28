@@ -48,59 +48,96 @@ class _GameState extends State<Game> {
         Padding(
           padding: EdgeInsets.only(left: 20.0, right: 20.0),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Container(
-                width: 100,
-                height: 100,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 1.0, color: Colors.red),
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Text(
-                  "Score\n$score",
-                  // "",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // Container(
+              //   width: 100,
+              //   height: 100,
+              //   alignment: Alignment.center,
+              //   decoration: BoxDecoration(
+              //     border: Border.all(width: 1.0, color: Colors.red),
+              //     borderRadius: BorderRadius.circular(10.0),
+              //   ),
+              //   child: Text(
+              //     "Score\n$score",
+              //     // "",
+              //     textAlign: TextAlign.center,
+              //     style: TextStyle(
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
               Stack(
                 // mainAxisAlignment: MainAxisAlignment.start,
                 // crossAxisAlignment: CrossAxisAlignment.end,
                 children: <Widget>[
-                  // JoystickView(
-                  //   onDirectionChanged: (x,y){
-
-                  //   },
-                  // )
+                  // JoystickView(),
                   CircleView.joystickCircle(
-                    174,
+                    180,
                     Colors.blueGrey,
                   ),
                   Positioned(
-                      left: 43.0,
-                      top: 47.0,
+                      left: 47.0,
+                      top: 50.0,
                       child:
                           CircleView.joystickInnerCircle(85, Colors.blueGrey)),
 
                   Positioned(
-                    left: 128,
-                    top: 75,
-                      child: CircleView.padButtonCircle(0, Colors.blueGrey,
-                          null, Icon(Icons.arrow_forward), ""))
-                  ,Positioned(
-                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
-                          null, Icon(Icons.arrow_back), ""))
-                  ,Positioned(
-                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
-                          null, Icon(Icons.arrow_upward), ""))
-                  ,Positioned(
-                      child: CircleView.padButtonCircle(50, Colors.blueGrey,
-                          null, Icon(Icons.arrow_downward), ""))
-                  
+                      left: 134,
+                      top: 76,
+                      child: CircleView.padButtonCircle(
+                          0,
+                          Colors.blueGrey,
+                          null,
+                          Icon(
+                            Icons.arrow_forward,
+                            color: Colors.white54,
+                          ),
+                          "")),
+                  Positioned(
+                      left: 18,
+                      top: 76,
+                      child: CircleView.padButtonCircle(
+                          0,
+                          Colors.blueGrey,
+                          null,
+                          Icon(
+                            Icons.arrow_back,
+                            color: Colors.white54,
+                          ),
+                          "")),
+                  Positioned(
+                      left: 75,
+                      top: 20.0,
+                      child: CircleView.padButtonCircle(
+                          0,
+                          Colors.blueGrey,
+                          null,
+                          Icon(
+                            Icons.arrow_upward,
+                            color: Colors.white54,
+                          ),
+                          "")),
+                  Positioned(
+                      left: 75,
+                      top: 138,
+                      child: InkWell(
+                        onTap: () {
+                          print("i am pressed");
+                        },
+                        child: CircleView.padButtonCircle(
+                            0,
+                            Colors.blueGrey,
+                            null,
+                            Icon(
+                              Icons.arrow_downward,
+                              color: Colors.white54,
+                            ),
+                            ""),
+                      )),
+                  // JoystickView(),
+
                   // Padding(
                   //   padding: EdgeInsets.only(right: 50),
                   //   child: RaisedButton(
