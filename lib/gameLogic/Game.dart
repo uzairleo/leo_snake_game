@@ -1,15 +1,11 @@
 import 'dart:async';
 import 'dart:math';
-// import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_snake_game/Widgets/widgets_at_different_game_state.dart';
 import 'package:leo_snake_game/customJoyStick/customJoystick.dart';
-// import 'package:leo_snake_game/customJoystick.dart';
-// import './Widgets/widgets_at_different_game_state.dart';
 
-// import 'package:control_pad/control_pad.dart';
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;

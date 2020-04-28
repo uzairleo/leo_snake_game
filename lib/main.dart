@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:leo_snake_game/Game.dart';
+import './GameLogic/Game.dart';
 
 void main() => runApp(MyApp());
 
