@@ -3,13 +3,14 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:leo_snake_game/Widgets/widgets_at_different_game_state.dart';
-import 'package:leo_snake_game/customJoyStick/customJoystick.dart';
+import 'package:leo_snake_game/Widgets/Aboutme.dart';
+import '../customJoyStick/customJoystick.dart';
+import '../Widgets/widgets_at_different_game_state.dart';
 
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
-Direction direction = Direction.UP;
+Direction direction = Direction.UP;//by default the snake direction is up
 var themeIcon = Icons.lightbulb_outline;
 
 class Game extends StatefulWidget {
@@ -30,6 +31,14 @@ class _GameState extends State<Game> {
       appBar: gameAppBar(),
       backgroundColor: Colors.brown[500],
       body: gameBody(),
+      // floatingActionButton: Container(
+      //   width: 40,
+      //   child: FloatingActionButton(
+      //     backgroundColor: Colors.blueGrey,
+      //     onPressed: (){},
+      //     child: Icon(Icons.settings),
+        // ),
+      // ),
     );
   }
 
@@ -42,10 +51,9 @@ class _GameState extends State<Game> {
         size: 28,
       ),
       actions: <Widget>[
-        IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () {
-                   })
+        IconButton(icon: Icon(FontAwesomeIcons.smile), onPressed: () {
+          showAboutmeSheet(context);
+        })
       ],
       title: Text(
         "Score $score",
@@ -64,8 +72,8 @@ class _GameState extends State<Game> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                width: 320,
-                height: 320,
+                width: 325,
+                height: 315,
                 padding: EdgeInsets.all(29),
                 decoration: BoxDecoration(
                   image: DecorationImage(
@@ -74,7 +82,7 @@ class _GameState extends State<Game> {
                   ),
                 ),
                 child: GestureDetector(
-                  behavior: HitTestBehavior.opaque,
+                  // behavior: HitTestBehavior.opaque,
                   onTapUp: (tapUpDetails) {
                     _handleTap(tapUpDetails);
                   },
@@ -188,7 +196,7 @@ class _GameState extends State<Game> {
             child: Text(
               "You Scored: $score\nTap to play again!",
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Colors.red,fontSize: 22,fontWeight: FontWeight.bold),
             ),
           ),
         );

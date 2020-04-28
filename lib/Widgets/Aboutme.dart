@@ -140,7 +140,7 @@ showAboutmeSheet(BuildContext context) {
                       fontWeight: FontWeight.w800, color: Colors.black45),
                 ),
                 Text(
-                  "Made with ❤️💓 in Pakistan",
+                  "Made with ❤️ in Pakistan",
                   style: TextStyle(
                       fontWeight: FontWeight.w800, color: Colors.black45),
                 ),
