@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:math';
-import 'package:control_pad/views/circle_view.dart';
+// import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:leo_snake_game/customJoystick.dart';
 import './Widgets/widgets_at_different_game_state.dart';
-import 'package:control_pad/control_pad.dart';
-
+// import 'package:control_pad/control_pad.dart';
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
@@ -25,30 +24,45 @@ class _GameState extends State<Game> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Container(
-          width: 320,
-          height: 320,
-          padding: EdgeInsets.all(29),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("Assets/snake_bg.png"),
-              fit: BoxFit.fill,
-            ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.brown,
+        elevation: 0,
+        title:Text("Score $score"),
+        centerTitle: true,
+      ),
+      backgroundColor: Colors.brown[500],
+      body:ListView(
+        children: <Widget>[
+          Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                width: 320,
+                height: 320,
+                padding: EdgeInsets.all(29),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("Assets/snake_bg.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTapUp: (tapUpDetails) {
+                    _handleTap(tapUpDetails);
+                  },
+                  child: _getChildBasedOnGameState(),
+                ),
+              ),
+              SizedBox(height:10.0),
+              CustomJoyStick(),
+            ],
+    ),
           ),
-          child: GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTapUp: (tapUpDetails) {
-              _handleTap(tapUpDetails);
-            },
-            child: _getChildBasedOnGameState(),
-          ),
-        ),
-        CustomJoyStick(),
-      ],
-    );
+        ],
+      ));
   }
 
   void _handleTap(TapUpDetails tapUpDetails) {

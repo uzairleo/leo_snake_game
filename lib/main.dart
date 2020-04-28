@@ -8,24 +8,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Olden Days Snake Game',
-      home: Home(),
+      home: Game(),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
-class Home extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.brown,
-        elevation: 0,
-        title:Text("Score $score"),
-        centerTitle: true,
-      ),
-      backgroundColor: Colors.brown[500],
-      body: Game(),
-    );
-  }
-}
