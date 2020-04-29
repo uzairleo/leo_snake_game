@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -30,15 +31,44 @@ class _GameState extends State<Game> {
   void initState() {
     super.initState();
   }
+  Future<bool> onBackPressed()
+  {
+    return showDialog(context: context,
+    builder: (BuildContext context){
+        return AlertDialog(
+           title: new Text('Are you sure?'),
+            content: new Text('Do you want to exit an App'),
+            actions: <Widget>[
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop(false);
+                },
+                child: Text("NO"),
+              ),
+              SizedBox(height: 16),
+              new FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop(true);
+                  exit(0);
+                },
+                child: Text("YES"),
+              ),
+            ],
+        );
+    })??false;//null pointer check
+  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: gameAppBar(),
-        backgroundColor: themeColor,
-        body: (MediaQuery.of(context).orientation==Orientation.portrait)
-              ?gameBodyPortrait()
-              :gameBodyLandscape(),
-        floatingActionButton: customAnimatedFab());
+    return WillPopScope(
+          onWillPop: onBackPressed,
+          child: Scaffold(
+          appBar: gameAppBar(),
+          backgroundColor: themeColor,
+          body: (MediaQuery.of(context).orientation==Orientation.portrait)
+                ?gameBodyPortrait()
+                :gameBodyLandscape(),
+          floatingActionButton: customAnimatedFab()),
+    );
   }
 
   customAnimatedFab() {
@@ -185,7 +215,7 @@ helpDialog(){
                   ),
                 ),
                 child: GestureDetector(
-                  // behavior: HitTestBehavior.opaque,
+                  behavior: HitTestBehavior.opaque,
                   onTapUp: (tapUpDetails) {
                     _handleTap(tapUpDetails);
                   },
