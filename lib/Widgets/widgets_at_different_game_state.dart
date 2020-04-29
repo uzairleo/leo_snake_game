@@ -24,6 +24,7 @@ final Widget gameRunningChild = Container(
   ),
 );
 double pointSize=15.5;
+
 final Widget newSnakePointInGame = AnimatedContainer(
   duration: Duration(seconds: 1),
   width: 15.5,

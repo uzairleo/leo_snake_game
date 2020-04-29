@@ -7,6 +7,7 @@ import 'package:leo_snake_game/Widgets/Aboutme.dart';
 import '../customJoyStick/customJoystick.dart';
 import '../Widgets/widgets_at_different_game_state.dart';
 
+AnimationController animController;
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
@@ -26,16 +27,16 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 1),onTimeChanged);
+    // Timer.periodic(Duration(seconds: 1),onTimeChanged);
   }
-  onTimeChanged(Timer timer)
-  {
-    setState(() {
-      
-      (pointSize==15.5)?
-      pointSize=30.5:pointSize=15.5;
-    });
-  }
+  // onTimeChanged(Timer timer)
+  // {
+  //   setState(() {
+
+  //     (pointSize==15.5)?
+  //     pointSize=30.5:pointSize=15.5;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +65,31 @@ class _GameState extends State<Game> {
         size: 28,
       ),
       actions: <Widget>[
-        IconButton(
-            icon: Icon(FontAwesomeIcons.smile),
-            onPressed: () {
-              showAboutmeSheet(context);
-            })
+        GestureDetector(
+          onTap: (){
+            showAboutmeSheet(context);
+          },
+                  child: CircleAvatar(
+            backgroundColor: Colors.white70,
+            radius: 22,
+                    child: Container(
+              width: 37,
+              height: 37,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                image: AssetImage('Assets/leo.png'),
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
+              )),
+            ),
+          ),
+        ),
+        SizedBox(width:14.0)
+        // IconButton(
+        //     icon: Icon(FontAwesomeIcons.smile),
+        //     onPressed: () {
+        //       showAboutmeSheet(context);
+        //     })
       ],
       title: Text(
         "Score $score",
