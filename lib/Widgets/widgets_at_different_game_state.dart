@@ -23,7 +23,7 @@ final Widget gameRunningChild = Container(
     borderRadius: BorderRadius.circular(7.0)
   ),
 );
-
+double pointSize=15.5;
 final Widget newSnakePointInGame = AnimatedContainer(
   duration: Duration(seconds: 1),
   width: 15.5,

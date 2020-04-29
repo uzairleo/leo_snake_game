@@ -10,7 +10,7 @@ import '../Widgets/widgets_at_different_game_state.dart';
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
-Direction direction = Direction.UP;//by default the snake direction is up
+Direction direction = Direction.UP; //by default the snake direction is up
 var themeIcon = Icons.lightbulb_outline;
 
 class Game extends StatefulWidget {
@@ -23,6 +23,19 @@ class _GameState extends State<Game> {
   Point newPointPosition;
   Timer timer;
   var gameState = GameState.START;
+  @override
+  void initState() {
+    super.initState();
+    Timer.periodic(Duration(seconds: 1),onTimeChanged);
+  }
+  onTimeChanged(Timer timer)
+  {
+    setState(() {
+      
+      (pointSize==15.5)?
+      pointSize=30.5:pointSize=15.5;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +50,7 @@ class _GameState extends State<Game> {
       //     backgroundColor: Colors.blueGrey,
       //     onPressed: (){},
       //     child: Icon(Icons.settings),
-        // ),
+      // ),
       // ),
     );
   }
@@ -51,9 +64,11 @@ class _GameState extends State<Game> {
         size: 28,
       ),
       actions: <Widget>[
-        IconButton(icon: Icon(FontAwesomeIcons.smile), onPressed: () {
-          showAboutmeSheet(context);
-        })
+        IconButton(
+            icon: Icon(FontAwesomeIcons.smile),
+            onPressed: () {
+              showAboutmeSheet(context);
+            })
       ],
       title: Text(
         "Score $score",
@@ -196,7 +211,8 @@ class _GameState extends State<Game> {
             child: Text(
               "You Scored: $score\nTap to play again!",
               textAlign: TextAlign.center,
-              style: TextStyle(color: Colors.red,fontSize: 22,fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  color: Colors.red, fontSize: 22, fontWeight: FontWeight.bold),
             ),
           ),
         );
