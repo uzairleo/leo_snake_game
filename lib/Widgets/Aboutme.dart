@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './ChipWidget.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 showAboutmeSheet(BuildContext context) {
   showModalBottomSheet(
       context: context,
@@ -73,7 +73,9 @@ showAboutmeSheet(BuildContext context) {
                           label: "Github",
                           iconColor: Colors.black,
                           textColor: Colors.black87,
-                          onPressed: () {},
+                          onPressed: () {
+                            urlLauncher("http:www.github.com/uzairleo");
+                          },
                         )),
                     Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -86,7 +88,9 @@ showAboutmeSheet(BuildContext context) {
                           label: "LinkedIn",
                           iconColor: Colors.lightBlue,
                           textColor: Colors.black87,
-                          onPressed: () {},
+                          onPressed: () {
+                            urlLauncher("https://www.linkedin.com/in/leo-uzair-78462b191/");
+                          },
                         )),
                     Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -99,7 +103,9 @@ showAboutmeSheet(BuildContext context) {
                           label: "Facebook",
                           iconColor: Colors.blue,
                           textColor: Colors.black87,
-                          onPressed: () {},
+                          onPressed: () {
+                            urlLauncher("https://web.facebook.com/uzairleo.336");
+                          },
                         )),
                   ],
                 ),
@@ -117,7 +123,9 @@ showAboutmeSheet(BuildContext context) {
                           label: "Twitter",
                           iconColor: Colors.blue,
                           textColor: Colors.black87,
-                          onPressed: () {},
+                          onPressed: () {
+             urlLauncher("https://twitter.com/uzairleo2");
+                          },
                         )),
                     Padding(
                         padding: const EdgeInsets.all(3.0),
@@ -147,4 +155,17 @@ showAboutmeSheet(BuildContext context) {
               ]),
         );
       });
+}
+
+urlLauncher(String url)async
+{
+  if(await canLaunch(url))
+  {
+    await launch(url);
+  }else
+  {
+    print("Invalid Url");
+    throw "Invalid url";
+  }
+
 }

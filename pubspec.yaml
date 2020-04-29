@@ -26,6 +26,7 @@ dependencies:
   control_pad: any
   font_awesome_flutter: any
   flutter_speed_dial: any
+  url_launcher: any
 
 dev_dependencies:
   flutter_test:

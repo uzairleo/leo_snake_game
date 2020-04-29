@@ -199,8 +199,8 @@ class _GameState extends State<Game> {
       ],
       title: Text(
         "Score $score",
-        style: TextStyle(fontFamily: 'Satisfy',color: Colors.white,
-         fontSize: 32),
+        style: TextStyle(fontFamily: 'digital-7',color: Colors.white,
+         fontSize: 42),
       ),
       centerTitle: true,
     );
