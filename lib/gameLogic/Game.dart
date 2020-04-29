@@ -9,12 +9,13 @@ import 'package:leo_snake_game/Widgets/Aboutme.dart';
 import '../customJoyStick/customJoystick.dart';
 import '../Widgets/widgets_at_different_game_state.dart';
 import 'package:flutter/services.dart';
+
 AnimationController animController;
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
 Direction direction = Direction.UP; //by default the snake direction is up
-var themeIcon =FontAwesomeIcons.lightbulb;
+var themeIcon = FontAwesomeIcons.lightbulb;
 var themeColor = Colors.brown[500];
 
 class Game extends StatefulWidget {
@@ -31,42 +32,45 @@ class _GameState extends State<Game> {
   void initState() {
     super.initState();
   }
-  Future<bool> onBackPressed()
-  {
-    return showDialog(context: context,
-    builder: (BuildContext context){
-        return AlertDialog(
-           title: new Text('Are you sure?'),
-            content: new Text('Do you want to exit an App'),
-            actions: <Widget>[
-              new FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop(false);
-                },
-                child: Text("NO"),
-              ),
-              SizedBox(height: 16),
-              new FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop(true);
-                  exit(0);
-                },
-                child: Text("YES"),
-              ),
-            ],
-        );
-    })??false;//null pointer check
+
+  Future<bool> onBackPressed() {
+    return showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: new Text('Are you sure?'),
+                content: new Text('Do you want to exit an App'),
+                actions: <Widget>[
+                  new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(false);
+                    },
+                    child: Text("NO"),
+                  ),
+                  SizedBox(height: 16),
+                  new FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop(true);
+                      exit(0);
+                    },
+                    child: Text("YES"),
+                  ),
+                ],
+              );
+            }) ??
+        false; //null pointer check
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-          onWillPop: onBackPressed,
-          child: Scaffold(
+      onWillPop: onBackPressed,
+      child: Scaffold(
           appBar: gameAppBar(),
           backgroundColor: themeColor,
-          body: (MediaQuery.of(context).orientation==Orientation.portrait)
-                ?gameBodyPortrait()
-                :gameBodyLandscape(),
+          body: (MediaQuery.of(context).orientation == Orientation.portrait)
+              ? gameBodyPortrait()
+              : gameBodyLandscape(),
           floatingActionButton: customAnimatedFab()),
     );
   }
@@ -95,20 +99,20 @@ class _GameState extends State<Game> {
           child: Icon(themeIcon, color: Colors.white),
           backgroundColor: Colors.green,
           shape: CircleBorder(),
-          onTap: (){
-              setState(() {
-                (themeIcon==FontAwesomeIcons.lightbulb)?
-                themeIcon=FontAwesomeIcons.solidLightbulb
-                :themeIcon=FontAwesomeIcons.lightbulb;
+          onTap: () {
+            setState(() {
+              (themeIcon == FontAwesomeIcons.lightbulb)
+                  ? themeIcon = FontAwesomeIcons.solidLightbulb
+                  : themeIcon = FontAwesomeIcons.lightbulb;
 
-                (themeColor==Colors.brown[500])
-                ?themeColor=Color.fromARGB(255,193,75,75)
-                :themeColor=Colors.brown[500];
+              (themeColor == Colors.brown[500])
+                  ? themeColor = Color.fromARGB(255, 193, 75, 75)
+                  : themeColor = Colors.brown[500];
 
-                (snakeColor== Color(0xFFFF0000))
-                ?snakeColor=Colors.brown[500]
-                :snakeColor= Color(0xFFFF0000);
-              });
+              (snakeColor == Color(0xFFFF0000))
+                  ? snakeColor = Colors.brown[500]
+                  : snakeColor = Color(0xFFFF0000);
+            });
           },
           label: 'Theme',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
@@ -118,9 +122,11 @@ class _GameState extends State<Game> {
           child: Icon(Icons.screen_rotation, color: Colors.white),
           backgroundColor: Colors.red,
           onTap: () {
-          (MediaQuery.of(context).orientation==Orientation.portrait)
-          ? SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight])
-          : SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+            (MediaQuery.of(context).orientation == Orientation.portrait)
+                ? SystemChrome.setPreferredOrientations(
+                    [DeviceOrientation.landscapeRight])
+                : SystemChrome.setPreferredOrientations(
+                    [DeviceOrientation.portraitUp]);
           },
           label: 'Screen Orientation',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
@@ -139,25 +145,28 @@ class _GameState extends State<Game> {
       ],
     );
   }
-helpDialog(){
-  showDialog(context: context,
-  builder: (BuildContext context){
-    return AlertDialog(
-      actions: <Widget>[
-        FlatButton(
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-           child: Text("OK"))
-      ],
-      title:Text("Instructions"),
-      content: Text("Leo snake game is very easy to use"
-                    "all u need to do is to handle the"
-                     "the joystick u seen there in dashboar"
-                     "and thats it. "),
-    );
-  });
-}
+
+  helpDialog() {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            actions: <Widget>[
+              FlatButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text("OK"))
+            ],
+            title: Text("Instructions"),
+            content: Text("Leo snake game is very easy to use"
+                "all u need to do is to handle the"
+                "the joystick u seen there in dashboar"
+                "and thats it. "),
+          );
+        });
+  }
+
   gameAppBar() {
     return AppBar(
       backgroundColor: themeColor,
@@ -190,7 +199,8 @@ helpDialog(){
       ],
       title: Text(
         "Score $score",
-        style: TextStyle(color: Colors.white, fontSize: 22),
+        style: TextStyle(fontFamily: 'Satisfy',color: Colors.white,
+         fontSize: 32),
       ),
       centerTitle: true,
     );
@@ -230,7 +240,8 @@ helpDialog(){
       ],
     );
   }
-gameBodyLandscape() {
+
+  gameBodyLandscape() {
     return ListView(
       children: <Widget>[
         AnimatedContainer(
