@@ -27,6 +27,8 @@ dependencies:
   font_awesome_flutter: any
   flutter_speed_dial: any
   url_launcher: any
+  android_intent: any
+  mailto: any
 
 dev_dependencies:
   flutter_test:
