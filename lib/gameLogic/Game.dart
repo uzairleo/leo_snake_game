@@ -35,7 +35,9 @@ class _GameState extends State<Game> {
     return Scaffold(
         appBar: gameAppBar(),
         backgroundColor: themeColor,
-        body: gameBody(),
+        body: (MediaQuery.of(context).orientation==Orientation.portrait)
+              ?gameBodyPortrait()
+              :gameBodyLandscape(),
         floatingActionButton: customAnimatedFab());
   }
 
@@ -70,8 +72,12 @@ class _GameState extends State<Game> {
                 :themeIcon=FontAwesomeIcons.lightbulb;
 
                 (themeColor==Colors.brown[500])
-                ?themeColor=Colors.red
+                ?themeColor=Color.fromARGB(255,193,75,75)
                 :themeColor=Colors.brown[500];
+
+                (snakeColor== Color(0xFFFF0000))
+                ?snakeColor=Colors.brown[500]
+                :snakeColor= Color(0xFFFF0000);
               });
           },
           label: 'Theme',
@@ -93,7 +99,9 @@ class _GameState extends State<Game> {
         SpeedDialChild(
           child: Icon(Icons.help, color: Colors.white),
           backgroundColor: Colors.blue,
-          onTap: () => print('Third CHILD'),
+          onTap: () {
+            helpDialog();
+          },
           label: 'Help',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.blue,
@@ -102,7 +110,23 @@ class _GameState extends State<Game> {
     );
   }
 helpDialog(){
-  
+  showDialog(context: context,
+  builder: (BuildContext context){
+    return AlertDialog(
+      actions: <Widget>[
+        FlatButton(
+          onPressed: (){
+            Navigator.of(context).pop();
+          },
+           child: Text("OK"))
+      ],
+      title:Text("Instructions"),
+      content: Text("Leo snake game is very easy to use"
+                    "all u need to do is to handle the"
+                     "the joystick u seen there in dashboar"
+                     "and thats it. "),
+    );
+  });
 }
   gameAppBar() {
     return AppBar(
@@ -133,11 +157,6 @@ helpDialog(){
           ),
         ),
         SizedBox(width: 14.0)
-        // IconButton(
-        //     icon: Icon(FontAwesomeIcons.smile),
-        //     onPressed: () {
-        //       showAboutmeSheet(context);
-        //     })
       ],
       title: Text(
         "Score $score",
@@ -147,7 +166,7 @@ helpDialog(){
     );
   }
 
-  gameBody() {
+  gameBodyPortrait() {
     return ListView(
       children: <Widget>[
         AnimatedContainer(
@@ -174,6 +193,40 @@ helpDialog(){
                 ),
               ),
               SizedBox(height: 10.0),
+              CustomJoyStick(),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+gameBodyLandscape() {
+    return ListView(
+      children: <Widget>[
+        AnimatedContainer(
+          duration: Duration(seconds: 1),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Container(
+                width: 340,
+                height: 270,
+                padding: EdgeInsets.all(29),
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("Assets/snake_bg.png"),
+                    fit: BoxFit.fill,
+                  ),
+                ),
+                child: GestureDetector(
+                  // behavior: HitTestBehavior.opaque,
+                  onTapUp: (tapUpDetails) {
+                    _handleTap(tapUpDetails);
+                  },
+                  child: _getChildBasedOnGameState(),
+                ),
+              ),
+              // SizedBox(height: 6.0),
               CustomJoyStick(),
             ],
           ),

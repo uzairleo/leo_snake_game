@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-var snakeColor= const Color(0xFFFF0000);
+var snakeColor=  Color(0xFFFF0000);
 final Widget gameStartChild = Container(
   width: 320,
   height: 320,
