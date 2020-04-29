@@ -1,6 +1,5 @@
 import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../GameLogic/Game.dart';
 //after this map and then after this try to create without buttons 

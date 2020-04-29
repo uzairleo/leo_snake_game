@@ -7,13 +7,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_snake_game/Widgets/Aboutme.dart';
 import '../customJoyStick/customJoystick.dart';
 import '../Widgets/widgets_at_different_game_state.dart';
-
+import 'package:flutter/services.dart';
 AnimationController animController;
 enum Direction { LEFT, RIGHT, UP, DOWN }
 enum GameState { START, RUNNING, FAILURE }
 int score = 0;
 Direction direction = Direction.UP; //by default the snake direction is up
-var themeIcon = Icons.lightbulb_outline;
+var themeIcon =FontAwesomeIcons.lightbulb;
+var themeColor = Colors.brown[500];
 
 class Game extends StatefulWidget {
   @override
@@ -29,12 +30,11 @@ class _GameState extends State<Game> {
   void initState() {
     super.initState();
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: gameAppBar(),
-        backgroundColor: Colors.brown[500],
+        backgroundColor: themeColor,
         body: gameBody(),
         floatingActionButton: customAnimatedFab());
   }
@@ -43,7 +43,7 @@ class _GameState extends State<Game> {
     return SpeedDial(
       // elevation: 0,
       tooltip: "Menu",
-      animatedIcon: AnimatedIcons.home_menu,
+      animatedIcon: AnimatedIcons.menu_close,
       animatedIconTheme: IconThemeData(size: 22.0),
       // child: Icon(Icons.add),
       onOpen: () => print('OPENING DIAL'),
@@ -52,32 +52,61 @@ class _GameState extends State<Game> {
       backgroundColor: Colors.blueGrey,
       overlayColor: Colors.transparent,
       shape: CircleBorder(),
-      animationSpeed: 5,
-      curve: Curves.elasticInOut,
+      overlayOpacity: 0.6,
+      marginRight: 6,
+      marginBottom: 7,
+      animationSpeed: 40,
+      curve: Curves.bounceIn,
+      foregroundColor: Colors.white70,
       children: [
         SpeedDialChild(
-          child: Icon(FontAwesomeIcons.lightbulb, color: Colors.white),
+          child: Icon(themeIcon, color: Colors.white),
           backgroundColor: Colors.green,
-          onTap: () => print('SECOND CHILD'),
-          // label: 'Second Child',
+          shape: CircleBorder(),
+          onTap: (){
+              setState(() {
+                (themeIcon==FontAwesomeIcons.lightbulb)?
+                themeIcon=FontAwesomeIcons.solidLightbulb
+                :themeIcon=FontAwesomeIcons.lightbulb;
+
+                (themeColor==Colors.brown[500])
+                ?themeColor=Colors.red
+                :themeColor=Colors.brown[500];
+              });
+          },
+          label: 'Theme',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
           labelBackgroundColor: Colors.green,
         ),
         SpeedDialChild(
+          child: Icon(Icons.screen_rotation, color: Colors.white),
+          backgroundColor: Colors.red,
+          onTap: () {
+          (MediaQuery.of(context).orientation==Orientation.portrait)
+          ? SystemChrome.setPreferredOrientations([DeviceOrientation.landscapeRight])
+          : SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+          },
+          label: 'Screen Orientation',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.red,
+        ),
+        SpeedDialChild(
           child: Icon(Icons.help, color: Colors.white),
           backgroundColor: Colors.blue,
-          onTap: () => print('FIRST CHILD'),
-          // label: 'First Child',
+          onTap: () => print('Third CHILD'),
+          label: 'Help',
           labelStyle: TextStyle(fontWeight: FontWeight.w500),
-          labelBackgroundColor: Colors.deepOrangeAccent,
+          labelBackgroundColor: Colors.blue,
         ),
       ],
     );
   }
-
+helpDialog(){
+  
+}
   gameAppBar() {
     return AppBar(
-      backgroundColor: Colors.brown[500],
+      backgroundColor: themeColor,
       elevation: 0,
       leading: Icon(
         FontAwesomeIcons.gamepad,
