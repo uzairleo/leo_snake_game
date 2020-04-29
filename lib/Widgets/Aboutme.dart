@@ -1,7 +1,12 @@
+// import 'dart:developer';
+import 'dart:io' show Platform;
+// import 'package:android_intent/android_intent.dart';
+import 'package:android_intent/android_intent.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import './ChipWidget.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 showAboutmeSheet(BuildContext context) {
   showModalBottomSheet(
       context: context,
@@ -36,7 +41,10 @@ showAboutmeSheet(BuildContext context) {
                       iconData: Icons.mail,
                       iconSize: 18.0,
                       label: "Contact",
-                      onPressed: () {},
+                      onPressed: () {
+                        _createEmail();
+                        // openMailBox();
+                      },
                       color: Colors.red,
                     ),
                   ],
@@ -74,7 +82,7 @@ showAboutmeSheet(BuildContext context) {
                           iconColor: Colors.black,
                           textColor: Colors.black87,
                           onPressed: () {
-                            urlLauncher("http:www.github.com/uzairleo");
+                            urlLauncher("http://www.github.com/uzairleo");
                           },
                         )),
                     Padding(
@@ -89,7 +97,8 @@ showAboutmeSheet(BuildContext context) {
                           iconColor: Colors.lightBlue,
                           textColor: Colors.black87,
                           onPressed: () {
-                            urlLauncher("https://www.linkedin.com/in/leo-uzair-78462b191/");
+                            urlLauncher(
+                                "https://www.linkedin.com/in/leo-uzair-78462b191/");
                           },
                         )),
                     Padding(
@@ -104,7 +113,8 @@ showAboutmeSheet(BuildContext context) {
                           iconColor: Colors.blue,
                           textColor: Colors.black87,
                           onPressed: () {
-                            urlLauncher("https://web.facebook.com/uzairleo.336");
+                            urlLauncher(
+                                "https://web.facebook.com/uzairleo.336");
                           },
                         )),
                   ],
@@ -124,7 +134,7 @@ showAboutmeSheet(BuildContext context) {
                           iconColor: Colors.blue,
                           textColor: Colors.black87,
                           onPressed: () {
-             urlLauncher("https://twitter.com/uzairleo2");
+                            urlLauncher("https://twitter.com/uzairleo2");
                           },
                         )),
                     Padding(
@@ -157,15 +167,33 @@ showAboutmeSheet(BuildContext context) {
       });
 }
 
-urlLauncher(String url)async
-{
-  if(await canLaunch(url))
-  {
+urlLauncher(String url) async {
+  if (await canLaunch(url)) {
     await launch(url);
-  }else
-  {
+  } else {
     print("Invalid Url");
     throw "Invalid url";
   }
+}
 
+void _createEmail() async {
+  // const emailaddress = 'mailto: uzair.jan336@gmail.com?subject=Sample Subject&body=This is a Sample email';
+  final String _emailSubject = 'contact leo';
+  final String _email =
+      Uri.encodeFull('mailto:uzair.jan336@gmail.com?subject=$_emailSubject');
+  if (await canLaunch(_email) == true) {
+    await launch(_email);
+  } else {
+    print('Could not Email');
+  }
+}
+void openMailBox()
+{
+  if (Platform.isAndroid) {
+                          AndroidIntent intent = new AndroidIntent(
+                            action: 'android.intent.action.MAIN',
+                            category: 'android.intent.category.APP_EMAIL',
+                          );
+                          intent.launch();
+                        }
 }
