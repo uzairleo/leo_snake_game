@@ -16,6 +16,7 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              customFab(),
               Stack(
                 children: <Widget>[
                   CircleView.joystickCircle(
@@ -90,7 +91,21 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
                   ),    
                              ],
               ),
+              customFab(),
             ],
           ));
   }
+  customFab({double width,double height,Function onpressed,Widget child})
+  {
+    return AnimatedContainer(
+      width: width,
+      height: height,
+      duration:Duration(seconds: 1),
+      child: FloatingActionButton(
+        onPressed: onpressed,
+        child: child,),
+
+    );
+  }
 }
+

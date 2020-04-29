@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   control_pad: any
   font_awesome_flutter: any
+  flutter_speed_dial: any
 
 dev_dependencies:
   flutter_test:
