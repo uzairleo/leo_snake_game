@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:leo_snake_game/Widgets/Aboutme.dart';
 import '../customJoyStick/customJoystick.dart';
@@ -27,32 +28,50 @@ class _GameState extends State<Game> {
   @override
   void initState() {
     super.initState();
-    // Timer.periodic(Duration(seconds: 1),onTimeChanged);
   }
-  // onTimeChanged(Timer timer)
-  // {
-  //   setState(() {
-
-  //     (pointSize==15.5)?
-  //     pointSize=30.5:pointSize=15.5;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(child: Text("")),
-      appBar: gameAppBar(),
-      backgroundColor: Colors.brown[500],
-      body: gameBody(),
-      // floatingActionButton: Container(
-      //   width: 40,
-      //   child: FloatingActionButton(
-      //     backgroundColor: Colors.blueGrey,
-      //     onPressed: (){},
-      //     child: Icon(Icons.settings),
-      // ),
-      // ),
+        appBar: gameAppBar(),
+        backgroundColor: Colors.brown[500],
+        body: gameBody(),
+        floatingActionButton: customAnimatedFab());
+  }
+
+  customAnimatedFab() {
+    return SpeedDial(
+      // elevation: 0,
+      tooltip: "Menu",
+      animatedIcon: AnimatedIcons.home_menu,
+      animatedIconTheme: IconThemeData(size: 22.0),
+      // child: Icon(Icons.add),
+      onOpen: () => print('OPENING DIAL'),
+      onClose: () => print('DIAL CLOSED'),
+      visible: true,
+      backgroundColor: Colors.blueGrey,
+      overlayColor: Colors.transparent,
+      shape: CircleBorder(),
+      animationSpeed: 5,
+      curve: Curves.elasticInOut,
+      children: [
+        SpeedDialChild(
+          child: Icon(FontAwesomeIcons.lightbulb, color: Colors.white),
+          backgroundColor: Colors.green,
+          onTap: () => print('SECOND CHILD'),
+          // label: 'Second Child',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.green,
+        ),
+        SpeedDialChild(
+          child: Icon(Icons.help, color: Colors.white),
+          backgroundColor: Colors.blue,
+          onTap: () => print('FIRST CHILD'),
+          // label: 'First Child',
+          labelStyle: TextStyle(fontWeight: FontWeight.w500),
+          labelBackgroundColor: Colors.deepOrangeAccent,
+        ),
+      ],
     );
   }
 
@@ -66,13 +85,13 @@ class _GameState extends State<Game> {
       ),
       actions: <Widget>[
         GestureDetector(
-          onTap: (){
+          onTap: () {
             showAboutmeSheet(context);
           },
-                  child: CircleAvatar(
+          child: CircleAvatar(
             backgroundColor: Colors.white70,
             radius: 22,
-                    child: Container(
+            child: Container(
               width: 37,
               height: 37,
               decoration: BoxDecoration(
@@ -84,7 +103,7 @@ class _GameState extends State<Game> {
             ),
           ),
         ),
-        SizedBox(width:14.0)
+        SizedBox(width: 14.0)
         // IconButton(
         //     icon: Icon(FontAwesomeIcons.smile),
         //     onPressed: () {

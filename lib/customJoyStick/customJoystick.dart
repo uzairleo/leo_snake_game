@@ -1,8 +1,11 @@
 import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../GameLogic/Game.dart';
-
-
+//after this map and then after this try to create without buttons 
+//and after that try quran pdf
+var playIcon=FontAwesomeIcons.play;
 class CustomJoyStick extends StatefulWidget {
   @override
   _CustomJoyStickState createState() => _CustomJoyStickState();
@@ -16,7 +19,6 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              customFab(),
               Stack(
                 children: <Widget>[
                   CircleView.joystickCircle(
@@ -85,16 +87,17 @@ class _CustomJoyStickState extends State<CustomJoyStick> {
                   ),
 
                   Positioned(
-                    left: 50.0,
-                    top: 51.5,
-                    child:Icon(Icons.tag_faces,size: 80,color:Colors.white24,)
+                    left: 60.0,
+                    top: 62.5,
+                    child:AnimatedContainer(
+                      duration: Duration(milliseconds: 500),
+                      child: Icon(FontAwesomeIcons.gamepad,size: 50,color:Colors.white24,))
                   ),    
                              ],
               ),
-              customFab(),
-            ],
-          ));
+            ]));
   }
+  
   customFab({double width,double height,Function onpressed,Widget child})
   {
     return AnimatedContainer(
