@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-var snakeColor=  Color(0xFFFF0000);
+
+var snakeColor = Colors.brown[500];
 final Widget gameStartChild = Container(
   width: 320,
   height: 320,
@@ -8,7 +9,8 @@ final Widget gameStartChild = Container(
     child: Text(
       "Tap to start the Game!\nDo not Touch Walls.",
       textAlign: TextAlign.center,
-      style: TextStyle(color: Colors.blue,fontSize: 22,fontWeight: FontWeight.bold),
+      style: TextStyle(
+          color: Colors.blue, fontSize: 22, fontWeight: FontWeight.bold),
     ),
   ),
 );
@@ -18,12 +20,12 @@ final Widget gameRunningChild = Container(
   width: 15.5,
   height: 15.5,
   decoration: new BoxDecoration(
-    color:snakeColor,
-    shape: BoxShape.rectangle,
-    borderRadius: BorderRadius.circular(7.0)
-  ),
+      color: snakeColor,
+      shape: BoxShape.rectangle,
+      borderRadius: BorderRadius.circular(7.0)
+      ),
 );
-double pointSize=15.5;
+double pointSize = 15.5;
 
 final Widget newSnakePointInGame = AnimatedContainer(
   duration: Duration(seconds: 1),
@@ -36,7 +38,8 @@ final Widget newSnakePointInGame = AnimatedContainer(
   ),
 );
 
-class Point {//This is the class which give you snake head
+class Point {
+  //This is the class which give you snake head
   double x;
   double y;
 

@@ -16,7 +16,7 @@ enum GameState { START, RUNNING, FAILURE }
 int score = 0;
 Direction direction = Direction.UP; //by default the snake direction is up
 var themeIcon = FontAwesomeIcons.lightbulb;
-var themeColor = Colors.brown[500];
+var themeColor = Color.fromARGB(255, 193, 75, 75);
 
 class Game extends StatefulWidget {
   @override
@@ -60,7 +60,7 @@ class _GameState extends State<Game> {
             }) ??
         false; //null pointer check
   }
-
+  
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -91,7 +91,7 @@ class _GameState extends State<Game> {
       overlayOpacity: 0.6,
       marginRight: 6,
       marginBottom: 7,
-      animationSpeed: 40,
+      // animationSpeed: 40,
       curve: Curves.bounceIn,
       foregroundColor: Colors.white70,
       children: [
@@ -105,13 +105,13 @@ class _GameState extends State<Game> {
                   ? themeIcon = FontAwesomeIcons.solidLightbulb
                   : themeIcon = FontAwesomeIcons.lightbulb;
 
-              (themeColor == Colors.brown[500])
-                  ? themeColor = Color.fromARGB(255, 193, 75, 75)
-                  : themeColor = Colors.brown[500];
+              (themeColor ==Color.fromARGB(255, 193, 75, 75))
+                  ? themeColor = Colors.brown[500]
+                  : themeColor = Color.fromARGB(255, 193, 75, 75);
 
-              (snakeColor == Color(0xFFFF0000))
-                  ? snakeColor = Colors.brown[500]
-                  : snakeColor = Color(0xFFFF0000);
+              (snakeColor == Colors.brown[500])
+                  ? snakeColor =Color(0xFFFF0000)
+                  : snakeColor = Colors.brown[500];
             });
           },
           label: 'Theme',
@@ -124,7 +124,7 @@ class _GameState extends State<Game> {
           onTap: () {
             (MediaQuery.of(context).orientation == Orientation.portrait)
                 ? SystemChrome.setPreferredOrientations(
-                    [DeviceOrientation.landscapeRight])
+                    [DeviceOrientation.landscapeLeft])
                 : SystemChrome.setPreferredOrientations(
                     [DeviceOrientation.portraitUp]);
           },
@@ -250,8 +250,8 @@ class _GameState extends State<Game> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Container(
-                width: 340,
-                height: 270,
+                width: 325,
+                height: 315,
                 padding: EdgeInsets.all(29),
                 decoration: BoxDecoration(
                   image: DecorationImage(
