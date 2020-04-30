@@ -60,7 +60,7 @@ class _GameState extends State<Game> {
             }) ??
         false; //null pointer check
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -105,12 +105,12 @@ class _GameState extends State<Game> {
                   ? themeIcon = FontAwesomeIcons.solidLightbulb
                   : themeIcon = FontAwesomeIcons.lightbulb;
 
-              (themeColor ==Color.fromARGB(255, 193, 75, 75))
+              (themeColor == Color.fromARGB(255, 193, 75, 75))
                   ? themeColor = Colors.brown[500]
                   : themeColor = Color.fromARGB(255, 193, 75, 75);
 
               (snakeColor == Colors.brown[500])
-                  ? snakeColor =Color(0xFFFF0000)
+                  ? snakeColor = Color(0xFFFF0000)
                   : snakeColor = Colors.brown[500];
             });
           },
@@ -199,8 +199,8 @@ class _GameState extends State<Game> {
       ],
       title: Text(
         "Score $score",
-        style: TextStyle(fontFamily: 'digital-7',color: Colors.white,
-         fontSize: 42),
+        style: TextStyle(
+            fontFamily: 'digital-7', color: Colors.white, fontSize: 42),
       ),
       centerTitle: true,
     );

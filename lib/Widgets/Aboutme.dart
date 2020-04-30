@@ -187,13 +187,13 @@ void _createEmail() async {
     print('Could not Email');
   }
 }
-void openMailBox()
-{
+
+void openMailBox() {
   if (Platform.isAndroid) {
-                          AndroidIntent intent = new AndroidIntent(
-                            action: 'android.intent.action.MAIN',
-                            category: 'android.intent.category.APP_EMAIL',
-                          );
-                          intent.launch();
-                        }
+    AndroidIntent intent = new AndroidIntent(
+      action: 'android.intent.action.MAIN',
+      category: 'android.intent.category.APP_EMAIL',
+    );
+    intent.launch();
+  }
 }

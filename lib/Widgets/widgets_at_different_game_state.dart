@@ -22,8 +22,7 @@ final Widget gameRunningChild = Container(
   decoration: new BoxDecoration(
       color: snakeColor,
       shape: BoxShape.rectangle,
-      borderRadius: BorderRadius.circular(7.0)
-      ),
+      borderRadius: BorderRadius.circular(7.0)),
 );
 double pointSize = 15.5;
 
