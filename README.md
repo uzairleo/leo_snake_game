@@ -14,9 +14,9 @@
  ![](Assets/leoGame.gif)
 
  ## Follow me on 
- [LinkedIn](https://www.linkedin.com/in/leo-uzair-78462b191/)
- [facebook](https://web.facebook.com/uzairleo.336)
- [twitter](https://twitter.com/uzairleo2)
+  - [LinkedIn](https://www.linkedin.com/in/leo-uzair-78462b191/)
+  - [facebook](https://web.facebook.com/uzairleo.336)
+  - [twitter](https://twitter.com/uzairleo2)
 
 
 ## Getting Started
