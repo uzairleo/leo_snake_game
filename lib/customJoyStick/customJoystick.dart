@@ -1,7 +1,7 @@
 import 'package:control_pad/views/circle_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../GameLogic/Game.dart';
+import '../gameLogic/Game.dart';
 
 //after this map and then after this try to create without buttons
 //and after that try quran pdf
